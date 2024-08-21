@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('deleted', 0)->get();
         return view('user.index', compact('users'));
     }
 
@@ -93,7 +93,8 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        $user->delete();
+        $user->deleted = 1;
+        $user->save();
 
         return redirect()->route('users.index')->with('success','User deleted successfully');
     }
