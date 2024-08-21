@@ -40,9 +40,11 @@
                                     data-last_name="{{ $user->last_name }}" 
                                     data-email="{{ $user->email }}" 
                                     data-phone_number="{{ $user->phone_number }}">Edit</button>
-                        
+                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                            <
+                            </form>
                         </td>
                     </tr>
                 @empty
