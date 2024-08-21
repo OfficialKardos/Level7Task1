@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //return view('users.edit', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -65,7 +65,24 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       
+        $validatedData = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required',
+            'password' => 'nullable',
+        ]);
+    
+        $user = User::findOrFail($id);
+
+        if ($request->filled('password')) {
+            $validatedData['password'] = bcrypt($request->input('password'));
+        } else {
+            unset($validatedData['password']);
+        }
+
+        $user->update($validatedData);
+
     
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
