@@ -29,17 +29,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'phone_number' => 'required',
-            'password' => 'required', 
-        ]);
         
-        $validatedData['password'] = bcrypt($request->input('password')); 
-        
-        User::create($validatedData);
         
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
