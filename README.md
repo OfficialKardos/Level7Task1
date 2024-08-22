@@ -7,8 +7,8 @@ Follow these steps to set up the project:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/your-project-repository.git
-cd your-project-repository
+git clone https://github.com/OfficialKardos/Level7Task1.git
+cd Level7Task1
 ```
 
 2. Install Dependencies
